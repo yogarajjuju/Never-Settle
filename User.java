@@ -1,10 +1,17 @@
 public class User {
-    // 1. Attributes (The traits every User will have)
+    // 1. The Attributes
     String username;
     String email;
     int age;
     boolean isOnline;
 
-    // Notice there is NO "public static void main(String[] args)" in here!
-    // Blueprints don't run code. They just define what a User looks like.
+    // 2. THE CONSTRUCTOR
+    // Notice it has the exact same name as the class (User)
+    public User(String newUsername, String newEmail, int newAge, boolean newIsOnline) {
+        // We take the data handed to us, and lock it into the Object's variables
+        this.username = newUsername; 
+        this.email = newEmail;
+        this.age = newAge;
+        this.isOnline = newIsOnline;
+    }
 }
