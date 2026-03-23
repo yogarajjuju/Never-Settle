@@ -2,24 +2,24 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class DatabaseConnection{
+public class Main{
     public static void main(String[] args){
         System.out.println("----Initating Database connection----");
-        String url="jdbc:msql://localhost:3306/discord_db";
+        String url="jdbc:mysql://localhost:3306/discord_db";
         String user ="root";
         String password="password123";
         try {
             System.out.println("Dailing the database...");
-            Connection myConnection  DriverManager.getConnection(url, user ,password);
+            Connection myConnection  =DriverManager.getConnection(url, user ,password);
             Statement myTruck =myConnection.createStatement();
 
-            String createTableSQL; "Create table If not Exists user (id Int Auto_increment Primary key, username Varchar(), role varchar(50));";
+           String createTableSQL = "CREATE TABLE IF NOT EXISTS users (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50), role VARCHAR(50));";
             myTruck.execute(createTableSQL);
              System.out.println("🟢 SUCCESS: 'users' table is ready.");
 
              String insertUserSQL ="Insert into users (username, role ) Values ('anyaforger', 'Admin');";
              myTruck.executeUpdate(insertUserSQL);
-               System.out.println("🟢 BOOM: User 'yogarajjuju' has been permanently saved to the vault!");
+               System.out.println("🟢 BOOM: User 'anyaforger' has been permanently saved to the vault!");
 
         } catch(Exception e){
             System.out.println("🔴 ERROR: Something crashed.");
