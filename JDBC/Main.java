@@ -19,15 +19,20 @@ public class Main {
             myTruck.execute(createTableSQL);
             System.out.println("🟢 SUCCESS: 'users' table is ready.");
 
-            String insertUserSQL = "Insert into users (username, role ) Values ('anyaforger', 'Admin');";
-            myTruck.executeUpdate(insertUserSQL);
-            System.out.println("🟢 BOOM: User 'anyaforger' has been permanently saved to the vault!");
+            // --- WE COMMENTED THIS OUT SO IT STOPS ADDING NEW ANYAS ---
+            // String insertUserSQL = "Insert into users (username, role ) Values ('anyaforger', 'Admin');";
+            // myTruck.executeUpdate(insertUserSQL);
+            // System.out.println("🟢 BOOM: User 'anyaforger' has been permanently saved to the vault!");
 
-            // --- WE MOVED THIS INSIDE THE TRY BLOCK! ---
+            // --- NEW: THE DELETE COMMAND ---
+            System.out.println("---- Deleting Clone (ID 3) ----");
+            String deleteSQL = "DELETE FROM users WHERE id = 3;";
+            int rowsDeleted = myTruck.executeUpdate(deleteSQL);
+            System.out.println("🗑️ " + rowsDeleted + " clone(s) deleted!");
+
+            // --- FETCHING THE RESULTS ---
             System.out.println("---- Fetching Users from Vault ----");
             String query = "SELECT * FROM users;";
-            
-            // We can actually just reuse your 'myTruck' statement instead of making a new one!
             ResultSet resultSet = myTruck.executeQuery(query);
 
             while (resultSet.next()) {
@@ -36,7 +41,6 @@ public class Main {
                 System.out.println("🆔 ID: " + id + " | 👤 User: " + username);
             }
             System.out.println("✅ Fetch complete!");
-            // -------------------------------------------
 
         } catch(Exception e) {
             System.out.println("🔴 ERROR: Something crashed.");
