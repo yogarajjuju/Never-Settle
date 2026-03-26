@@ -19,16 +19,11 @@ public class Main {
             myTruck.execute(createTableSQL);
             System.out.println("🟢 SUCCESS: 'users' table is ready.");
 
-            // --- WE COMMENTED THIS OUT SO IT STOPS ADDING NEW ANYAS ---
-            // String insertUserSQL = "Insert into users (username, role ) Values ('anyaforger', 'Admin');";
-            // myTruck.executeUpdate(insertUserSQL);
-            // System.out.println("🟢 BOOM: User 'anyaforger' has been permanently saved to the vault!");
-
-            // --- NEW: THE DELETE COMMAND ---
-            System.out.println("---- Deleting Clone (ID 3) ----");
-            String deleteSQL = "DELETE FROM users WHERE id = 3;";
-            int rowsDeleted = myTruck.executeUpdate(deleteSQL);
-            System.out.println("🗑️ " + rowsDeleted + " clone(s) deleted!");
+            // --- NEW: THE UPDATE COMMAND ---
+            System.out.println("---- Upgrading Anya's Role (ID 2) ----");
+            String updateSQL = "UPDATE users SET role = 'Super Admin' WHERE id = 2;";
+            int rowsUpdated = myTruck.executeUpdate(updateSQL);
+            System.out.println("✨ " + rowsUpdated + " user(s) upgraded!");
 
             // --- FETCHING THE RESULTS ---
             System.out.println("---- Fetching Users from Vault ----");
@@ -38,7 +33,8 @@ public class Main {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id"); 
                 String username = resultSet.getString("username");
-                System.out.println("🆔 ID: " + id + " | 👤 User: " + username);
+                String role = resultSet.getString("role"); // Grabbing the role to prove it changed!
+                System.out.println("🆔 ID: " + id + " | 👤 User: " + username + " | 🛡️ Role: " + role);
             }
             System.out.println("✅ Fetch complete!");
 
